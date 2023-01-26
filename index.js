@@ -23,18 +23,18 @@ app.get('/productList', function (req, res){
     res.send()
 })
 
-// authentifié en tant qu'admin ou utilisateur
-// admin
+// authentifié en tant qu'admin
 // ajout jeu
 app.post('/addJeu', function(req, res){
     res.send()
 })
 
+// delete jeu
 app.delete('/deleteJeu', function (req, res) {
     res.send()
 })
 
-// les 2
+// authentifié en tant qu'utilisateur
 app.get('/updateJeu', function(req, res){
     res.send()
 })
