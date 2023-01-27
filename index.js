@@ -3,6 +3,8 @@ const axios = require('axios')
 const app = express()
 const createUser = require('./createUser')
 const createGame = require('./createGame')
+const getGame = require('./getGame')
+const gameList = require('./gameList')
 
 
 app.use(express.json())
@@ -26,13 +28,15 @@ app.post('/authentification', function(req, res){
 })
 
 //recupérer un element
-app.get('/unjeu', function (req, res){
-    res.send()
+app.get('/game/:id', async function (req, res){
+    const game = await getGame.getGame(req.params.id, res)
+    res.json(game)
 })
 
 //listing des produits
-app.get('/productList', function (req, res){
-    res.send()
+app.get('/allGame', async function (req, res){
+    const allGame = await gameList.gameList(res)
+    res.json(allGame)
 })
 
 
