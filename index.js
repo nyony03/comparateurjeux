@@ -5,6 +5,7 @@ const createUser = require('./createUser')
 const createGame = require('./createGame')
 const getGame = require('./getGame')
 const gameList = require('./gameList')
+const deleteGame = require('./deleteGame')
 
 
 app.use(express.json())
@@ -41,8 +42,9 @@ app.get('/allGame', async function (req, res){
 
 
 // delete jeu
-app.delete('/deleteJeu', function (req, res) {
-    res.send()
+app.delete('/deleteJeu/:id', async function (req, res) {
+    await deleteGame.deleteGame(req.params.id)
+    // res.send('le jeu qui a un id' + req.param.id + 'a été supprimé avec succès')
 })
 
 // authentifié en tant qu'utilisateur
