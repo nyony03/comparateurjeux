@@ -1,25 +1,30 @@
 const axios = require("axios");
 
 async function createUser(req, res){
+    console.log('ici')
     const login = req.body.login
     const email = req.body.email
     const password = req.body.password
+    const role = req.body.role ? req.body.role : 'user';
 
-    if(!req.body.login){
+    if(!login){
         res.status(401).json({ error: 'Login was not provided.' })
     }
 
-    if(!req.body.email){
+    if(!email){
         res.status(401).json({ error: 'email was not provided.' })
     }
 
-    if(!req.body.password){
+    if(!password){
         res.status(401).json({ error: 'password was not provided.' })
     }
+
     const user = {
         'login' : login,
         'email' : email,
-        'password' : password
+        'password' : password,
+        'role' : role
+
     }
 
     const userBDD = await axios({
@@ -37,7 +42,7 @@ async function createUser(req, res){
         return
     }
 
-    return userBDD.data
+    res.json(userBDD.data)
 
 }
 
