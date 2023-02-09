@@ -5,18 +5,24 @@ async function createUser(req, res){
     const email = req.body.email
     const password = req.body.password
 
-    if(!login || !email || !password){
-        res.status(401).json({ error: 'Login or email or password was not provided.' })
-        return
+    if(!req.body.login){
+        res.status(401).json({ error: 'Login was not provided.' })
     }
 
+    if(!req.body.email){
+        res.status(401).json({ error: 'email was not provided.' })
+    }
+
+    if(!req.body.password){
+        res.status(401).json({ error: 'password was not provided.' })
+    }
     const user = {
         'login' : login,
         'email' : email,
         'password' : password
     }
 
-    await axios({
+    const userBDD = await axios({
         method: 'post',
         url: 'https://testnode-811e.restdb.io/rest/utilisateur',
         data: user,
@@ -26,9 +32,16 @@ async function createUser(req, res){
                 'content-type': 'application/json' },
     });
 
-    return user
+    if(!userBDD){
+        res.status(401).json({ error: 'User creation failure' })
+        return
+    }
+
+    return userBDD.data
+
 }
 
 module.exports = {
     createUser: createUser,
 }
+

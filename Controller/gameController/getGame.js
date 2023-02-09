@@ -1,5 +1,6 @@
 const axios = require("axios");
 async function getGame(id, res){
+
     const gameList = await axios({
         method: 'get',
         url: 'https://testnode-811e.restdb.io/rest/jeux',
@@ -15,7 +16,8 @@ async function getGame(id, res){
         res.status(401).json({ error: 'Game not found.' })
         return
     }
-    return game;
+
+    res.json(game);
 }
 
 module.exports = {

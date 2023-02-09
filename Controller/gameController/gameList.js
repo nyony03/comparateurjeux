@@ -10,10 +10,11 @@ async function gameList(res){
     });
 
     if(!gameList){
-        res.status(401).json({ error: 'Game not found.' })
+        res.status(401).json({ error: 'No game found in the database.' })
         return
     }
-    return gameList.data;
+
+    res.json(gameList.data);
 }
 
 module.exports = {
