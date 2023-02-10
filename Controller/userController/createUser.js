@@ -1,7 +1,11 @@
 const axios = require("axios");
+const jwt = require('jsonwebtoken');
+const secret = 'thisismysecret';
 
 async function createUser(req, res){
-    console.log('ici')
+    const token = req.headers.authorization.split(' ')[0];
+    console.log(jwt.verify(token, secret));
+
     const login = req.body.login
     const email = req.body.email
     const password = req.body.password

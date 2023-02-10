@@ -21,13 +21,15 @@ const jwtOptions = {
 passport.use(
     new JwtStrategy(jwtOptions, function(payload, next) {
 
-        const user = users.find(user => user.login === payload.login)
+        users.then(function(resolvedUsers) {
+            const user = resolvedUsers.find(user => user.login === payload.login);
 
-        if (user) {
-            next(null, user)
-        } else {
-            next(null, false)
-        }
+            if (user) {
+                next(null, user)
+            } else {
+                next(null, false)
+            }
+        })
     })
 )
 

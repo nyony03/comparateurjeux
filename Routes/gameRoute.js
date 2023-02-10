@@ -12,12 +12,12 @@ const authentification = require('../Controller/authentificationController/authC
 router
     .route('/')
     .get((req, res) => controllerGetAllGame.gameList(res))
-    .post(authentification.verificationToken, (req, res) => controllerCreateGame.createGame(req, res))
+    .post((req, res) => controllerCreateGame.createGame(req, res))
 
 router
     .route('/:id')
     .get((req, res) => controllerGetOneGame.getGame(req.params.id, res))
-    .put(authentification.verificationToken,(req, res) => controllerUpdateOneGame.updateGame(req.params.id, req.body, res))
-    .delete(authentification.verificationToken,(req, res) => controllerDeleteOneGame.deleteGame(req.params.id))
+    .put((req, res) => controllerUpdateOneGame.updateGame(req.params.id, req.body, res))
+    .delete((req, res) => controllerDeleteOneGame.deleteGame(req.params.id))
 
 module.exports = router;
