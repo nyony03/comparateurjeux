@@ -1,15 +1,21 @@
 const axios = require("axios");
-async function getGame(id, res){
 
+async function getJeuBDD() {
     const gameList = await axios({
         method: 'get',
         url: 'https://testnode-811e.restdb.io/rest/jeux',
         headers:
-            {   'cache-control': 'no-cache',
+            {
+                'cache-control': 'no-cache',
                 'x-apikey': '337d6d3d1cea8098fc893c62e78a80b48e954',
-                'content-type': 'application/json' },
+                'content-type': 'application/json'
+            },
     });
-
+    return gameList;
+}
+async function getGameById(id, res){
+    
+    const gameList = await getJeuBDD()
     const game = gameList.data.filter((game) => game._id === id)
 
     if(!game){
@@ -20,7 +26,21 @@ async function getGame(id, res){
     res.json(game);
 }
 
+async function getGameByName(name, res){
+    
+    const gameList = await getJeuBDD();
+    const game = gameList.data.filter((game) => game.name === name)
+
+    if(!game){
+        res.status(401).json({ error: 'Game not found.' })
+        return
+    }
+
+    res.json(game);
+}
+
 module.exports = {
-    getGame : getGame,
+    getGame : getGameById,
+    getGameByName: getGameByName
 }
 

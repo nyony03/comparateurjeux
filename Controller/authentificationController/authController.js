@@ -1,26 +1,37 @@
 const express = require('express')
-const app = express()
-const passport = require('passport')
-const jwt = require('jsonwebtoken')
-const passportJWT = require('passport-jwt')
-const secret = 'thisismysecret'
-const ExtractJwt = passportJWT.ExtractJwt
-const JwtStrategy = passportJWT.Strategy
-
+const token = require('jsonwebtoken')
+const passport = require("passport");
+const ExtractJWT = require('passport-jwt').ExtractJwt;
 const userController = require('../userController/getAllUser')
+const JwtStrategy = require('passport-jwt').Strategy;
+
 
 //avoir tous les users de la BDD
 const users = userController.getAllUser()
 
-//configuration
+const app = express()
+const secret = 'thisismysecret'
+
+//utilisation de la session pour mettre l'user dans la session
+app.use(passport.session());
+
+//pour serializer user pour utilisée pour convertir l'objet utilisateur en chaîne JSON
+// car l'application ne peut pas sérialiser l'utilisateur pour le stocker dans la session
+passport.serializeUser(function(users, done) {
+    done(null, JSON.stringify(users));
+});
+
+passport.deserializeUser(function(users, done) {
+    done(null, JSON.parse(users));
+});
+
 const jwtOptions = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: secret
 }
 
 passport.use(
     new JwtStrategy(jwtOptions, function(payload, next) {
-
         users.then(function(resolvedUsers) {
             const user = resolvedUsers.find(user => user.login === payload.login);
 
@@ -33,7 +44,7 @@ passport.use(
     })
 )
 
-app.use(passport.initialize())
+app.use(passport.initialize(undefined))
 
 app.use(express.json())
 
@@ -53,21 +64,15 @@ async function authentification (req, res){
             return
         }
 
-        let userJwt = ""
-        if(user.role === 'user'){
-            userJwt = jwt.sign({ id: user.id, role: 'user' }, secret);
-        }
+        const userJwt = token.sign({ login: user.login}, secret);
 
-        if(user.role === 'admin'){
-            userJwt = jwt.sign({ id: user.id, role: 'admin' }, secret);
-        }
 
         res.json({ jwt: userJwt })
     });
 }
 
 function verificationToken(){
-    passport.authenticate('jwt', { session: false })
+    return passport.authenticate('jwt', { session: true })
 }
 
 module.exports = {

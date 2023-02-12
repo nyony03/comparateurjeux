@@ -1,5 +1,8 @@
 const axios = require("axios");
 async function gameList(res){
+    // autorisation accès vue
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080")
+
     const gameList = await axios({
         method: 'get',
         url: 'https://testnode-811e.restdb.io/rest/jeux',

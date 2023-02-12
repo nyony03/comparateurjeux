@@ -3,6 +3,13 @@ const app = express()
 const gameRoute = require('./Routes/gameRoute')
 const userRoute = require('./Routes/userRoute')
 const authRoute = require('./Routes/authRoute')
+const session = require('express-session');
+
+app.use(session({
+    secret: 'thisismysecret',
+    resave: false,
+    saveUninitialized: true
+}));
 
 
 app.use(express.json())
