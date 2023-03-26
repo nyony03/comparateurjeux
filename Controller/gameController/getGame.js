@@ -14,7 +14,9 @@ async function getJeuBDD() {
     return gameList;
 }
 async function getGameById(id, res){
-    
+    // autorisation accès vue
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080")
+
     const gameList = await getJeuBDD()
     const game = gameList.data.filter((game) => game._id === id)
 

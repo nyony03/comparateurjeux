@@ -5,12 +5,19 @@ const userRoute = require('./Routes/userRoute')
 const authRoute = require('./Routes/authRoute')
 const session = require('express-session');
 
+// Ajoutez ce middleware avant les routes
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*'); // ou spécifiez une liste de domaines autorisés au lieu de *
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
+});
+
 app.use(session({
     secret: 'thisismysecret',
     resave: false,
     saveUninitialized: true
 }));
-
 
 app.use(express.json())
 
