@@ -1,12 +1,17 @@
 const axios = require("axios");
 
 async function createGame(req, res){
+
+    // autorisation accès vue
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080")
+
     const price = req.body.price
     const name = req.body.name
     const description = req.body.description
     const type = req.body.type
     const platform = req.body.platform
     const url = req.body.url
+    const url2 = req.body.url2
 
     let element;
     switch (!element) {
@@ -28,6 +33,9 @@ async function createGame(req, res){
         case(url):
             res.status(401).json({ error: 'Url was not provided.' })
             return
+        case(url2):
+            res.status(401).json({ error: 'Url2 was not provided.' })
+            return
     }
 
     const game = {
@@ -36,7 +44,8 @@ async function createGame(req, res){
         'description': description,
         'type' : type,
         'platform' : platform,
-        'url': url
+        'url': url,
+        'url2': url2
     }
 
     const NewGame = await axios({

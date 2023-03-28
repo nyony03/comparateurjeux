@@ -1,6 +1,8 @@
 const axios = require('axios')
 
 async function updateGame(id, newData, res){
+    // autorisation accès vue
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080")
 
     const gameUpdate = await axios({
         method: 'PUT',

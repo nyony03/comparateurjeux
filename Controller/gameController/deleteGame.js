@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-async function deleteGame(id){
+async function deleteGame(id, res){
     const response = await axios({
         method: 'DELETE',
         url: `https://testnode-811e.restdb.io/rest/jeux/${id}`,

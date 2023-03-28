@@ -17,6 +17,22 @@ async function createUser(req, res){
         res.status(401).json({ error: 'password was not provided.' })
     }
 
+    // Vérifier si l'utilisateur existe déjà
+    const userList = await axios({
+        method: 'get',
+        url: 'https://testnode-811e.restdb.io/rest/utilisateur',
+        headers:
+            {   'cache-control': 'no-cache',
+                'x-apikey': '337d6d3d1cea8098fc893c62e78a80b48e954',
+                'content-type': 'application/json' },
+    });
+
+    const userExisting = userList.data.filter((user) => user.login === login)
+    if (userExisting.length !== 0) {
+        res.status(401).json({ error: "User already exists." });
+        return;
+    }
+
     const user = {
         'login' : login,
         'email' : email,

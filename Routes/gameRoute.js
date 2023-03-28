@@ -19,6 +19,6 @@ router
     .get((req, res) => controllerGetGame.getGame(req.params.id, res))
     .get((req, res) => controllerGetGame.getGameByName(req.params.name, res))
     .put(authentification.verificationToken(), (req, res) => controllerUpdateOneGame.updateGame(req.params.id, req.body, res))
-    .delete(authentification.verificationToken(), (req, res) => controllerDeleteOneGame.deleteGame(req.params.id))
+    .delete(authentification.verificationToken(), (req, res) => controllerDeleteOneGame.deleteGame(req.params.id, res))
 
 module.exports = router;

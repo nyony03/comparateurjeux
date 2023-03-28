@@ -9,6 +9,6 @@ const authentification = require('../Controller/authentificationController/authC
 router
     .route('/')
     .get((req, res) => getAllUserController.getAllUser())
-    .post(authentification.verificationToken(), (req, res) => createUserController.createUser(req, res))
+    .post((req, res) => createUserController.createUser(req, res))
 
 module.exports = router;
