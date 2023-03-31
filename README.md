@@ -26,12 +26,19 @@ https://comparateurjeux.vercel.app/
 
 ## Fonctionnalités
 -[x] une route POST pour l’inscription
+
 -[x] Une route POST pour la connection
+
 -[x] Une route GET pour la récupération d’un élément
+
 -[x] Une route GET pour le listing des produits
+
 -[x] Une même route POST pour l’ajout ET la modification d’un élément
+
 -[x] Une route GET pour le listing des produits
+
 -[x] Une route DELETE pour la suppression d’un élément
+
 
 ## Projet conçu par:
 Ny Ony Rakotondramonja
