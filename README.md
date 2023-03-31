@@ -20,7 +20,7 @@ https://restdb.io/
 
 ### Herbergement
 ```
-vercel.app
+https://comparateurjeux.vercel.app/
 ```
 
 

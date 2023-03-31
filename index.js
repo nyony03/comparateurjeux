@@ -7,6 +7,9 @@ const session = require('express-session');
 const cors = require('cors');
 
 app.use(cors());
+app.listen(PORT, () => {
+    console.log(`API listening on PORT ${PORT} `)
+})
 
 app.use(cors({
     origin: '*'
