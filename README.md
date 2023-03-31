@@ -31,6 +31,8 @@ https://comparateurjeux.vercel.app/
 
 - [x] Une route GET pour la récupération d’un élément
 
+- [x] Une route GET pour la récupération d’un utilisateur
+
 - [x] Une route GET pour le listing des produits
 
 - [x] Une même route POST pour l’ajout ET la modification d’un élément
