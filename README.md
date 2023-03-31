@@ -1,6 +1,6 @@
 # Jeux du moments - Backend
 
-Ce dépôt contient le code backend d'une application de comparaison de produits. L'application permet aux administrateurs de se connecter pour ajouter, modifier et supprimer des produits avec leurs caractéristiques. 
+Ce dépôt contient le code backend d'une application de comparaison de jeux vidéos. L'application permet aux administrateurs de se connecter pour ajouter, modifier et supprimer des produits avec leurs caractéristiques. 
 Les utilisateurs non authentifiés peuvent afficher la liste des produits et comparer deux produits.
 Le backend sera fait avec un express, une authentification passport JWT et la communication entre le front et backend se fera avec du JSON.
 
